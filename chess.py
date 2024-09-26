@@ -22,6 +22,7 @@ def ltr_to_num(coords):
 
 
 def get_white_piece_and_coords():
+    """Get white piece and coordinates from user."""
     while True:
         try:
             piece_and_coords = input(
@@ -42,6 +43,7 @@ def get_white_piece_and_coords():
 
 
 def get_black_pieces_and_coords():
+    """Get black piece(s) and coordinates from user returns as a dictionary."""
     black_pieces = []
     while True:
         piece_and_coords = input(
@@ -74,14 +76,17 @@ def get_black_pieces_and_coords():
 
 
 def can_take(white_piece, white_coords, black_pieces):
+    """Logic for white piece to take black piece."""
     potential_takes = []
 
     if white_piece == "pawn":
+        # Pawn moves diagonally one step
         potential_takes = [
             (white_coords[0] + 1, white_coords[1] + 1),  # captures right diagonal
             (white_coords[0] - 1, white_coords[1] + 1),  # captures left diagonal
         ]
     elif white_piece == "knight":
+        # Knight moves in L-shape pattern
         potential_takes = [
             (white_coords[0] + 2, white_coords[1] + 1),
             (white_coords[0] + 2, white_coords[1] - 1),
@@ -97,13 +102,15 @@ def can_take(white_piece, white_coords, black_pieces):
     potential_takes = [tuple(move) for move in potential_takes]
 
     # Find black pieces that can be taken
-    can_take_pieces = [(tuple(bc), bp) for (bc, bp) in black_pieces if tuple(bc) in potential_takes]
+    can_take_pieces = [
+        (tuple(bc), bp) for (bc, bp) in black_pieces if tuple(bc) in potential_takes
+    ]
 
     return can_take_pieces
 
 
-
 def main():
+    """Main function of the code to produce final output."""
     white_piece, white_coords = get_white_piece_and_coords()
 
     black_pieces = get_black_pieces_and_coords()
