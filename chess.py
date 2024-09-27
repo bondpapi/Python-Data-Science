@@ -1,7 +1,4 @@
-pieces = ["king", "queen", "rook", "pawn", "bishop", "knight"]
-
-
-def coord_num_ltr(coords):
+def is_valid_coordinate(coords):
     """Check if coordinates are valid in chess notation."""
     if len(coords) != 2:
         return False
@@ -29,7 +26,9 @@ def get_white_piece_and_coords():
                 "Enter White Piece (pawn or knight) and Coordinates: "
             ).lower()
             white_piece, white_coords = piece_and_coords.split(" ")
-            if white_piece not in ["pawn", "knight"] or not coord_num_ltr(white_coords):
+            if white_piece not in ["pawn", "knight"] or not is_valid_coordinate(
+                white_coords
+            ):
                 print(
                     "Invalid input. Please enter a piece (pawn or knight) and coordinates (e.g., pawn b3)."
                 )
@@ -43,8 +42,10 @@ def get_white_piece_and_coords():
 
 
 def get_black_pieces_and_coords():
-    """Get black piece(s) and coordinates from user returns as a dictionary."""
+    """Get black piece(s) and coordinates from user, returning as a list."""
     black_pieces = []
+    valid_pieces = ["king", "queen", "rook", "pawn", "bishop", "knight"]
+
     while True:
         piece_and_coords = input(
             "Now Enter Black Piece and Coordinates (or 'done' to finish): "
@@ -53,25 +54,27 @@ def get_black_pieces_and_coords():
             break
         try:
             black_piece, black_coords = piece_and_coords.split()
-            if black_piece not in pieces:
-                raise ValueError(
+            if black_piece not in valid_pieces:
+                print(
                     "Invalid piece. Please enter one of 'pawn', 'rook', 'knight', 'bishop', 'queen', or 'king'."
                 )
-            if not coord_num_ltr(black_coords):
+                continue
+            if not is_valid_coordinate(black_coords):
                 print(
                     "Invalid coordinates. Please enter coordinates in the format 'a1', 'd4', 'b2', etc."
                 )
                 continue
             black_coords_num = ltr_to_num(black_coords)
             if tuple(black_coords_num) in [tuple(coord) for coord, _ in black_pieces]:
-                raise ValueError(
+                print(
                     "A piece already occupies that coordinate, try a different coordinate."
                 )
+                continue
 
             black_pieces.append((tuple(black_coords_num), black_piece))
             print("Black Piece added successfully.")
         except ValueError as ve:
-            print(ve)
+            print("Invalid input format, please try again.")
     return black_pieces
 
 
