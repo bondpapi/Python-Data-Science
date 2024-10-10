@@ -11,7 +11,7 @@ def word_occurences():
 
     """Loop read each word to count number of occurences"""
     for _ in range(n):
-        # for each word, we use 'input().strip() to clean up any spaces
+        # for each word, we use 'input().strip() to clean up any spaces.
         word = input().strip()
 
         # Checking if the word is already in word_count
