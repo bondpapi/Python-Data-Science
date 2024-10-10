@@ -4,7 +4,7 @@ import re
 def valid_uid(uid):
     """Function checks Conditions for Valid UID"""
 
-    # Check if the UID has exactly 10 characters
+    # Check if the UID has exactly 10 characters.
     if len(uid) != 10:
         return False
 
