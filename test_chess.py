@@ -1,5 +1,6 @@
 from chess import coord_num_ltr, ltr_to_num, can_take
 
+
 import unittest
 
 
