@@ -28,6 +28,7 @@ class ComplexNumber:
         return ComplexNumber(real_part, imag_part)
 
     def mod(self):
+        """modulas of two complex numbers"""
         return ComplexNumber(math.sqrt(self.real**2 + self.imag**2), 0)
 
     def __str__(self):
