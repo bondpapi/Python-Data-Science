@@ -1,5 +1,4 @@
 import intertools
-
 # intertools.product() generates all possible combinations by taking one element from each list
 
 
